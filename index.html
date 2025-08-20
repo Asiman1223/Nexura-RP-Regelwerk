@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXURA ROLEPLAY - Serverregeln</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --dark-purple: #4a148c;
+            --medium-purple: #7b1fa2;
+            --light-purple: #9c27b0;
+            --accent-purple: #ce93d8;
+            --text-primary: #f5f5f5;
+            --text-secondary: #bdbdbd;
+            --card-bg: rgba(30, 30, 30, 0.8);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(rgba(138, 43, 226, 0.1) 2px, transparent 2px),
+                radial-gradient(rgba(138, 43, 226, 0.07) 2px, transparent 2px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--dark-purple), var(--medium-purple));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 20, 140, 0.5) 0%, rgba(156, 39, 176, 0.3) 100%);
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            margin: 2rem 0 1rem;
+            color: var(--accent-purple);
+            border-bottom: 2px solid var(--light-purple);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--accent-purple);
+            margin: 1.5rem 0 0.75rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .rules-container {
+            padding: 2rem 0;
+        }
+        
+        .rules-section {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(122, 31, 162, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .rules-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-header {
+            background: linear-gradient(to right, var(--dark-purple), var(--medium-purple));
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-header h2 {
+            margin: 0;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        .section-content {
+            padding: 1.5rem;
+            display: none;
+        }
+        
+        .section-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .rule-item {
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--medium-purple);
+            padding-left: 1rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .rule-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .rule-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .rule-title i {
+            margin-right: 0.75rem;
+            color: var(--light-purple);
+        }
+        
+        .rule-content {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            padding-left: 2.2rem;
+        }
+        
+        .rule-examples {
+            margin-top: 0.75rem;
+            padding-left: 1rem;
+            border-left: 2px dotted var(--medium-purple);
+        }
+        
+        .rule-example {
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .rule-example::before {
+            content: '• ';
+            color: var(--accent-purple);
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .section-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .navigation {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 26, 46, 0.95);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-purple);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--medium-purple);
+            color: white;
+        }
+        
+        footer {
+            background: linear-gradient(to right, var(--dark-purple), var(--medium-purple));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--medium-purple);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background-color: var(--light-purple);
+            transform: translateY(-5px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(156, 39, 176, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(156, 39, 176, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(156, 39, 176, 0); }
+        }
+        
+        .highlight {
+            background-color: rgba(156, 39, 176, 0.2);
+            border-radius: 4px;
+            padding: 0 4px;
+        }
+        
+        .important {
+            color: var(--accent-purple);
+            font-weight: bold;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--medium-purple), transparent);
+            margin: 2rem 0;
+        }
+        
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <h1>NEXURA ROLEPLAY</h1>
+            <p class="subtitle">Herzlich Willkommen auf unserem Server! Hier findest du alle wichtigen Regeln für ein faires und spannendes Rollenspiel-Erlebnis.</p>
+        </div>
+    </header>
+    
+    <div class="navigation">
+        <div class="container nav-container">
+            <div class="logo">NEXURA</div>
+            <div class="nav-links">
+                <a href="#roleplay" class="nav-link active">Roleplay</a>
+                <a href="#raub" class="nav-link">Raub / Geiselnahmen</a>
+                <a href="#allgemein" class="nav-link">Allgemeine Regeln</a>
+                <a href="#ffa" class="nav-link">FFA & Tiere</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container rules-container">
+        <div id="roleplay" class="rules-section">
+            <div class="section-header active">
+                <h2><i class="fas fa-theater-masks"></i> §1 Verhalten im Roleplay</h2>
+                <div class="toggle-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="section-content active">
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-map-marker-alt"></i> Erlaubte & Verbotene Orte
+                    </div>
+                    <div class="rule-content">
+                        Bestimmte Orte sind für illegale Aktivitäten verboten, andere erlaubt. Beachte immer die entsprechenden Zonen.
+                        <div class="rule-examples">
+                            <div class="rule-example">Verboten: Zentrale Parks und Plätze, Meeting-Point, Mechaniker, MD</div>
+                            <div class="rule-example">Erlaubt: Abgelegene Gassen, Hinterhöfe, verlassene Gebäude</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-heartbeat"></i> §1.1 Schütze dein Leben!
+                    </div>
+                    <div class="rule-content">
+                        Dein Charakter soll sein Leben bewahren und nicht leichtfertig aufs Spiel setzen. Bei Bedrohung handle realistisch und gefährde dich nicht unnötig.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-skull"></i> §1.2 RDM (Random-Deathmatch)
+                    </div>
+                    <div class="rule-content">
+                        Sinnlose Konflikte, die zu einem Ingame-Tod führen, sind verboten und werden bestraft.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-car-crash"></i> §1.3 VDM (Vehicle-Deathmatch)
+                    </div>
+                    <div class="rule-content">
+                        Das absichtliche Überfahren anderer Spieler ist untersagt und wird streng geahndet.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-exclamation-triangle"></i> §1.4 Fail Roleplay
+                    </div>
+                    <div class="rule-content">
+                        Unrealistische oder lebensgefährliche Handlungen zählen als Fail-RP und werden bestraft. Handlungen deines Charakters müssen stets nachvollziehbar und realitätsnah sein.
+                        <div class="rule-examples">
+                            <div class="rule-example">Sprechen im bewusstlosen Zustand</div>
+                            <div class="rule-example">Mit zerstörtem Fahrzeug oder platten Reifen fahren</div>
+                            <div class="rule-example">Offroad mit ungeeigneten Fahrzeugen</div>
+                            <div class="rule-example">Extremes „Pitten" ohne RP-Hintergrund</div>
+                            <div class="rule-example">Emotes im Auto oder während Gefechten</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-fist-raised"></i> §1.5 Power Roleplay
+                    </div>
+                    <div class="rule-content">
+                        Handlungen, die deinem Gegenüber keine Chance lassen oder ihn dominieren, sind verboten. Jeder muss die Möglichkeit haben, auf Situationen zu reagieren.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-globe"></i> §1.6 Metagaming
+                    </div>
+                    <div class="rule-content">
+                        Informationen aus Twitch, Youtube, Discord oder anderen Quellen außerhalb des Spiels dürfen nicht für RP genutzt werden. Verstöße werden streng bestraft.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-bug"></i> §1.7 Bugusing
+                    </div>
+                    <div class="rule-content">
+                        Das Ausnutzen von Bugs oder Spielfehlern ist strengstens untersagt und führt zum Ausschluss vom Server.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-shield-alt"></i> §1.8 Safezones
+                    </div>
+                    <div class="rule-content">
+                        In Safezones ist jegliche körperliche Gewalt und Provokation verboten. Verstöße werden sanktioniert.
+                        <div class="rule-examples">
+                            <div class="rule-example">Zentrale Treffpunkte (z.B. Hauptpark)</div>
+                            <div class="rule-example">Krankenhaus</div>
+                            <div class="rule-example">Autohändler</div>
+                            <div class="rule-example">Flughafen (Spawn)</div>
+                            <div class="rule-example">Mechaniker</div>
+                            <div class="rule-example">Taxiunternehmen</div>
+                            <div class="rule-example">Legale Jobbereiche</div>
+                            <div class="rule-example">Kleidungsgeschäfte, Restaurants, Bars, Clubs etc.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-ban"></i> §1.9 Sexuelles Roleplay & Belästigung
+                    </div>
+                    <div class="rule-content">
+                        Sexuelle Belästigung und Roleplay sind strengstens verboten und führen zu einem sofortigen Bann.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-car-side"></i> §1.10 Drive-By
+                    </div>
+                    <div class="rule-content">
+                        Drive-By-Aktionen sind nur mit realistischem RP-Hintergrund und unter Beachtung der Regeln erlaubt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-crosshairs"></i> §1.11 Waffengebrauch & Eskalationen
+                    </div>
+                    <div class="rule-content">
+                        Der Gebrauch von Waffen ist nur im äußersten Notfall und mit RP-Hintergrund gestattet. Übermäßiger Schusswaffeneinsatz ist untersagt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-users"></i> §1.12 Angriff auf Fraktionen
+                    </div>
+                    <div class="rule-content">
+                        Angriffe auf Fraktionen oder Routen müssen verhältnismäßig und mit triftigem Grund erfolgen.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-skull-crossbones"></i> §1.13 Todeszonen
+                    </div>
+                    <div class="rule-content">
+                        In bestimmten Zonen darf ohne Schussankündigung gehandelt werden, jedoch nur mit legitimen RP-Hintergrund.
+                        <div class="rule-examples">
+                            <div class="rule-example">Staatsgefängnis</div>
+                            <div class="rule-example">Militärgelände</div>
+                            <div class="rule-example">Polizeigebäude</div>
+                            <div class="rule-example">Anwesen von Fraktionen</div>
+                            <div class="rule-example">Sperrzonen</div>
+                            <div class="rule-example">Illegale Routen</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-tshirt"></i> §1.14 Kleidung beim Einreisen
+                    </div>
+                    <div class="rule-content">
+                        Kleidung bei der Einreise sollte neutral und realistisch sein. Schutzwesten oder Helme sind nicht gestattet.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-comments"></i> §1.15 OOC-Talk (Out of Character)
+                    </div>
+                    <div class="rule-content">
+                        Im RP sprichst du als deine Spielfigur. Begriffe aus der echten Welt sind tabu. Ausnahme: In speziell ausgewiesenen Bereichen (z.B. Skybar) darf OOC gesprochen werden, aber darf nicht ins RP übernommen werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-angry"></i> §1.16 OOC-Madness
+                    </div>
+                    <div class="rule-content">
+                        Extreme Beleidigungen, sexistische oder rassistische Äußerungen sind verboten und werden streng geahndet.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-running"></i> §1.17 RP-Flucht / Combat Logging
+                    </div>
+                    <div class="rule-content">
+                        Das Verlassen einer RP-Situation durch Offline gehen oder Flucht in Apartments/Safezones ist verboten. Nach einer ausgespielten RP-Situation musst du mindestens 10 Minuten online bleiben.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-phone"></i> §1.18 Kommunikationsmittel
+                    </div>
+                    <div class="rule-content">
+                        Im RP darf ausschließlich über die vorgesehenen Kanäle (Teamspeak, Handy, Funkgerät) kommuniziert werden. Discord und andere Dienste sind während des RP nicht gestattet.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-ban"></i> §1.19 Blacklisted Wörter
+                    </div>
+                    <div class="rule-content">
+                        Bestimmte Begriffe sind im RP verboten, z.B. alles, was auf Server, Support, Regelwerk oder Modder verweist sowie rassistische Ausdrücke.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-book"></i> §1.20 Hinweise aufs Regelwerk
+                    </div>
+                    <div class="rule-content">
+                        Anspielungen auf das Regelwerk oder Support sind im RP verboten und werden sanktioniert.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-thumbs-down"></i> §1.21 Demütigungs- und Erniedrigungs-RP
+                    </div>
+                    <div class="rule-content">
+                        Extreme Demütigung oder das absichtliche Rauben des Spielspaßes sind unzulässig. Die Würde des Charakters ist zu wahren.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-smile"></i> §1.22 Schikane & Spielspaß
+                    </div>
+                    <div class="rule-content">
+                        Absichtliche Schikane ist verboten. Behandle andere so, wie du selbst behandelt werden möchtest.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-car"></i> §1.23 Reckless Driving
+                    </div>
+                    <div class="rule-content">
+                        Rücksichtsloses Fahren ohne RP-Hintergrund wird sanktioniert, besonders an belebten Orten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-mask"></i> §1.24 Ausrauben von Spielern
+                    </div>
+                    <div class="rule-content">
+                        Das Ausrauben anderer Spieler ohne RP-Hintergrund ist untersagt. Grüngeld darf nicht entwendet werden. Das Klauen von Gegenständen aus fremden Fahrzeugen ohne RP-Hintergrund ist ebenfalls verboten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-user-shield"></i> §1.25 Admin Kleidung
+                    </div>
+                    <div class="rule-content">
+                        Admins im RP gelten als unsichtbar und dürfen nicht beachtet oder angesprochen werden, solange sie nicht aktiv teilnehmen.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-bullhorn"></i> §1.26 Schuss-Ankündigung
+                    </div>
+                    <div class="rule-content">
+                        Schuss-Ankündigungen müssen klar und rechtzeitig ausgesprochen werden. Die Gegenpartei muss die Möglichkeit zur Reaktion erhalten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-user-friends"></i> §1.27 Drittparteien
+                    </div>
+                    <div class="rule-content">
+                        Dritte Parteien dürfen sich nicht in laufende Konflikte einmischen, außer bei bestimmten Ausnahmen (z.B. Staatsbeamte bei Geiselnahmen).
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-users"></i> §1.28 Gruppierungen
+                    </div>
+                    <div class="rule-content">
+                        Inoffizielle Gruppen dürfen maximal aus sieben Mitgliedern bestehen, Aktionen mit mehr als fünf Personen sind nicht gestattet.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-heart-broken"></i> §1.29 New-Life-Regel (Ausbluten)
+                    </div>
+                    <div class="rule-content">
+                        Nach dem Ausbluten darfst du dich nicht an den RP-Strang erinnern oder an den selben Ort zurückkehren.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-briefcase-medical"></i> §1.30 Unantastbarkeit von Dienstleistern
+                    </div>
+                    <div class="rule-content">
+                        Medics, Taxifahrer und Reporter dürfen nicht grundlos angegriffen werden. Fahrzeuge und Ausrüstung dieser Gruppen sind ebenfalls geschützt, außer bei Eigenverschulden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-hospital"></i> §1.31 Medic RP
+                    </div>
+                    <div class="rule-content">
+                        Medic-RP muss ausgespielt werden. Nach schweren Verletzungen ist das sofortige Verlassen des MD untersagt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-exclamation"></i> §1.32 Cop Baiting / Gang Baiting
+                    </div>
+                    <div class="rule-content">
+                        Das absichtliche Provozieren von Polizisten, Gangs oder Mafien ist verboten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-handcuffs"></i> §1.33 Fesseln von Personen
+                    </div>
+                    <div class="rule-content">
+                        Vor dem Fesseln einer Person ist eine Ankündigung erforderlich und es muss eine Reaktionszeit gewährt werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-exclamation-circle"></i> §1.34 Sperrzonen
+                    </div>
+                    <div class="rule-content">
+                        Sperrzonen werden öffentlich ausgerufen und dürfen nur nach bestimmten Regeln betreten werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-car-alt"></i> §1.35 Verkehrskontrollen
+                    </div>
+                    <div class="rule-content">
+                        Bei Verkehrskontrollen darf nicht ohne hinreichenden Grund geschossen werden. Beamte dürfen Personen nur mit triftigem Grund durchsuchen.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-tachometer-alt"></i> §1.36 Verfolgungsjagden
+                    </div>
+                    <div class="rule-content">
+                        Verfolgungsjagden müssen realistisch gestaltet werden. Unnötig hartes Rammen ist verboten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-map-marked-alt"></i> §1.37 Grenze
+                    </div>
+                    <div class="rule-content">
+                        An der Grenze darf ohne Schussankündigung gehandelt werden, aber nur mit legitimen RP-Hintergrund.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-robot"></i> §1.38 AFK-Farming
+                    </div>
+                    <div class="rule-content">
+                        AFK-Farming ist auf allen Routen verboten. Du musst immer ansprechbar sein.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-dizzy"></i> §1.39 Leichenschändung
+                    </div>
+                    <div class="rule-content">
+                        Das Schänden oder Reden mit bewusstlosen Personen ist untersagt, außer in bestimmten Fraktions-RP-Situationen.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-times-circle"></i> §1.40 RP-Verweigerung
+                    </div>
+                    <div class="rule-content">
+                        Das Verweigern oder ständige Entkommen aus RP-Situationen ist verboten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-mask"></i> §1.41 Maskierung
+                    </div>
+                    <div class="rule-content">
+                        Vollmaskierte Personen dürfen nicht an Stimme oder Aussehen erkannt werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-comment-slash"></i> §1.42 Emotes im Gefecht
+                    </div>
+                    <div class="rule-content">
+                        Während eines Kampfes sind Emotes verboten, besonders im Auto.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-ad"></i> §1.43 Werbung am Lifeinvader
+                    </div>
+                    <div class="rule-content">
+                        Werbung ist nur für An- und Verkäufe, Dienstleistungen und Events erlaubt. Sonstige Infos benötigen einen RP-Hintergrund.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-undo"></i> §1.44 Gegenstände rückerstatten
+                    </div>
+                    <div class="rule-content">
+                        Rückerstattung von Gegenständen erfolgt nur mit Video-Beweis.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-sync"></i> §1.45 Server Restarts
+                    </div>
+                    <div class="rule-content">
+                        15 Minuten vor einem Neustart dürfen keine großen RP-Situationen begonnen werden. Nach dem Restart wird die RP-Situation fortgeführt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-road"></i> §1.46 Offroad fahren
+                    </div>
+                    <div class="rule-content">
+                        Offroad-Fahren mit ungeeigneten Fahrzeugen ist untersagt. Im Notfall darf Offroad gefahren werden, aber realistisch und vorsichtig.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-music"></i> §1.47 Soundboards
+                    </div>
+                    <div class="rule-content">
+                        Musik über den Sprachchat ist erlaubt, muss aber auf Wunsch anderer Spieler ausgeschaltet werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-laugh-squint"></i> §1.48 Trolling
+                    </div>
+                    <div class="rule-content">
+                        Absichtliches Schädigen oder Belästigen anderer Spieler ist strengstens untersagt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-image"></i> §1.49 Bilder im Discord
+                    </div>
+                    <div class="rule-content">
+                        Das Posten von Screenshots im Discord ist erlaubt, solange keine Fraktion oder Person dadurch erniedrigt wird.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-signature"></i> §1.50 Gruppennamen und Nachnamen
+                    </div>
+                    <div class="rule-content">
+                        Gruppennamen als Nachnamen sind nicht gestattet. Zu viele gleiche Nachnamen werden durch das Team geändert.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-ban"></i> §1.51 Verbotene Inhalte und Verhaltensweisen
+                    </div>
+                    <div class="rule-content">
+                        Pornografie, das Ausspielen von Behinderungen/Krankheiten, verbotene Lieder, Hassreden und Religionsthemen sind untersagt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-eye-slash"></i> §1.52 Sexuelle Inhalte & Nacktheit
+                    </div>
+                    <div class="rule-content">
+                        Das Darstellen nackter Charaktere und sexuelle Handlungen im RP sind verboten.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="raub" class="rules-section">
+            <div class="section-header">
+                <h2><i class="fas fa-mask"></i> §3 Raub / Geiselnahmen</h2>
+                <div class="toggle-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-user-lock"></i> §3.1 Geiselnahmen
+                    </div>
+                    <div class="rule-content">
+                        Geiselnahmen sind erst ab einer Anzahl von 3 Beamten erlaubt. Maximal eine Geisel pro Geiselnehmer. Fake-Geiseln sind verboten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-comment-dollar"></i> §3.2 Forderungen und Verhandlungen
+                    </div>
+                    <div class="rule-content">
+                        Maximaler Betrag und Art der Forderung ist 150000. Das Leben der Geisel steht immer im Vordergrund.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-store-alt-slash"></i> §3.3 Raubüberfälle
+                    </div>
+                    <div class="rule-content">
+                        Zeitabstände zwischen Raubs 25 Min, Bedingungen für Durchführung und Freilassung der Geiseln müssen eingehalten werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-user-ninja"></i> §3.4 Überfall auf Zivilisten/Beamte
+                    </div>
+                    <div class="rule-content">
+                        Zivilisten dürfen nur mit RP-Hintergrund überfallen werden. Beamten dürfen keine Waffen entwendet werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-building"></i> §3.5 Stürmung von Staatsfraktionen
+                    </div>
+                    <div class="rule-content">
+                        Stürmungen sind nur mit RP-Hintergrund und ab einer bestimmten Anzahl von Beamten erlaubt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-car-side"></i> §3.6 Stehlen von Fahrzeugen
+                    </div>
+                    <div class="rule-content">
+                        Das Stehlen von Fahrzeugen ist nur mit triftigem RP-Hintergrund erlaubt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-skull"></i> §3.7 Ausrauben von Leichen
+                    </div>
+                    <div class="rule-content">
+                        Nur im Zusammenhang mit der eigenen RP-Situation darf eine Leiche durchsucht werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-money-check"></i> §3.8 Spieler am Bankautomaten ausrauben
+                    </div>
+                    <div class="rule-content">
+                        Es ist nicht erlaubt, Spieler am Bankautomaten zu berauben oder zu Geldüberweisungen zu zwingen.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="allgemein" class="rules-section">
+            <div class="section-header">
+                <h2><i class="fas fa-gavel"></i> §4 Allgemeine Regeln</h2>
+                <div class="toggle-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-home"></i> §4.1 Hausrecht
+                    </div>
+                    <div class="rule-content">
+                        Das Serverteam kann nach Absprache Spieler jederzeit ausschließen.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-video"></i> §4.2 Aufnahme
+                    </div>
+                    <div class="rule-content">
+                        Mit dem Beitritt zum Server erklärst du dich einverstanden, dass deine Stimme ggf. in Streams/Aufnahmen zu hören ist.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-exclamation-triangle"></i> §4.3 Verwarnungen
+                    </div>
+                    <div class="rule-content">
+                        Verwarnungen dienen als Hinweis. Wiederholte Verstöße können zu härteren Strafen führen.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-microphone"></i> §4.4 Sprachchat
+                    </div>
+                    <div class="rule-content">
+                        Funktionierender Sprachchat/Mikrofon ist Pflicht.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-microphone-alt-slash"></i> §4.5 Stimmenverzerrer & Mikrofon Qualität
+                    </div>
+                    <div class="rule-content">
+                        Gute Mikrofon-Qualität ist Pflicht. Stimmenverzerrer sind verboten (Ausnahmen nur per Support-Freigabe).
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-circle"></i> §4.6 Grauzonen
+                    </div>
+                    <div class="rule-content">
+                        Das Ausnutzen von Grauzonen im Regelwerk ist untersagt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-terminal"></i> §4.7 Hacken / Modden / Makros
+                    </div>
+                    <div class="rule-content">
+                        Jegliches Cheating, Modding oder Makro-Nutzung ist strengstens verboten und führt zum Bann.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-desktop"></i> §4.8 Bildschirmauflösung & Grafikeinstellungen
+                    </div>
+                    <div class="rule-content">
+                        Das absichtliche Verändern der Auflösung zur Vorteilsnahme ist verboten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-database"></i> §4.9 Speicherung von Persönlichen Daten
+                    </div>
+                    <div class="rule-content">
+                        Mit dem Akzeptieren der Regeln stimmst du der Speicherung deiner IP-Adresse zu. Keine Weitergabe an Dritte.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-gift"></i> §4.10 Weitergabe von Ingame-Gegenständen
+                    </div>
+                    <div class="rule-content">
+                        Das Verschenken von Echtgeld-Fahrzeugen ist erlaubt. Das Verschenken großer Summen/mehrerer Fahrzeuge ohne Gegenleistung ist verboten. Ingame-Gegenstände dürfen nicht für Echtgeld verkauft werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-user-secret"></i> §4.11 Verschwiegenheit
+                    </div>
+                    <div class="rule-content">
+                        Support-Gespräche dürfen nicht veröffentlicht werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-play-circle"></i> §4.12 Erst ausspielen, dann melden
+                    </div>
+                    <div class="rule-content">
+                        Support darf erst nach ausgespielter RP-Situation kontaktiert werden.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-users-cog"></i> §4.13 Fraktionen im Support
+                    </div>
+                    <div class="rule-content">
+                        Bei Supportfällen mit mehreren Fraktionen muss die Leaderschaft teilnehmen.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-gavel"></i> §4.14 Supportkrieg
+                    </div>
+                    <div class="rule-content">
+                        IC-Rache wegen Supportfällen ist untersagt.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-ad"></i> §4.15 Fremdwerbung
+                    </div>
+                    <div class="rule-content">
+                        Fremdwerbung jeglicher Art ist untersagt und führt zum Serverausschluss.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-globe"></i> §4.16 Darstellung des Servers in externen Medien
+                    </div>
+                    <div class="rule-content">
+                        Negative Darstellungen oder herabwürdigende Inhalte sind verboten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-trademark"></i> §4.17 Verbot von Echtmarken
+                    </div>
+                    <div class="rule-content">
+                        Die Verwendung von realen Marken oder Markennamen ist strengstens untersagt.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="ffa" class="rules-section">
+            <div class="section-header">
+                <h2><i class="fas fa-gamepad"></i> §5 & §6 FFA-Bereich & Tiermenü</h2>
+                <div class="toggle-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-comments"></i> §5.1 OOC Talk
+                    </div>
+                    <div class="rule-content">
+                        OOC Talk ist im FFA-Bereich erlaubt, außerhalb gelten die normalen Regeln.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-users"></i> §5.2 Teaming
+                    </div>
+                    <div class="rule-content">
+                        Teaming ist im FFA-Bereich verboten.
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-title">
+                        <i class="fas fa-paw"></i> §6.1 Verhalten als Tier
+                    </div>
+                    <div class="rule-content">
+                        Tiere müssen sich der Rolle entsprechend verhalten. Missbrauch und Trolling als Tier führen zu Sanktionen.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="rules-section">
+            <div class="section-header">
+                <h2><i class="fas fa-info-circle"></i> Hinweis</h2>
+                <div class="toggle-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="section-content">
+                <p>Alle Ban-Längen sind Richtwerte und können je nach Situation angepasst werden. Das Serverteam behält sich vor, nach eigenem Ermessen zu handeln.</p>
+                <p class="important">Bei Fragen oder Unsicherheiten steht das NEXURA-Team jederzeit zur Verfügung!</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <h3>NEXURA ROLEPLAY</h3>
+            <p>Wir freuen uns auf spannende Rollenspiel-Erlebnisse mit dir!</p>
+            <p>&copy; 2025 NEXURA ROLEPLAY - Alle Rechte vorbehalten</p>
+        </div>
+    </footer>
+    
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+        // Toggle sections
+        document.querySelectorAll('.section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.classList.toggle('active');
+                const content = header.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Auto expand the section if it's collapsed
+                const sectionHeader = targetElement.querySelector('.section-header');
+                const sectionContent = targetElement.querySelector('.section-content');
+                
+                if (!sectionContent.classList.contains('active')) {
+                    sectionHeader.classList.add('active');
+                    sectionContent.classList.add('active');
+                }
+            });
+        });
+        
+        // Scroll to top button
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            
+            document.querySelectorAll('.rules-section').forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Open first section by default
+        document.querySelector('.section-header').classList.add('active');
+        document.querySelector('.section-content').classList.add('active');
+    </script>
+</body>
+</html>
